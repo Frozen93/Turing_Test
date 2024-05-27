@@ -7,6 +7,16 @@ openai_api_key = st.secrets["openai_key"]
 llm = ChatOpenAI(api_key=openai_api_key, model="gpt-4o")
 random_number = random.randint(0,1)
 
+@st.experimental_fragment
+def decision_fragment():
+    decision = st.selectbox("Mensch oder KI?", ["-", "Mensch", "KI"])
+    if decision == "-":
+        st.markdown("Von wem stammt der linke Text?")
+    elif decision == "Mensch" and random_number==0:
+        st.markdown("**Richtig!**")
+    else: 
+        st.markdown("**Das stimmt leider nicht!**")
+
 st.title("Turing Test")
 st.subheader("Mensch vs KI - erkennst du den Unterschied?")
 
@@ -22,11 +32,12 @@ if st.button("Generiere Antwort"):
                 st.info(human_text)
             else:
                 st.info(ai_text)
-
+            decision_fragment()
 
         with r:
             if random_number == 1:
                 st.info(human_text)
             else:
                 st.info(ai_text)
+            
         
