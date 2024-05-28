@@ -36,7 +36,7 @@ st.subheader("Mensch vs KI - erkennst du den Unterschied?")
 
 question = st.text_input("Frage/Prompt")
 human_text = st.text_input("Deine Antwort:", type="password")
-prompt = f"Du beantwortest Fragen und Prompts in sehr menschenähnlichem Stil. Halte dich eher kurz und schreibe nicht zu formal, sondern wie man in einer Unterhaltung sprechen würde. Antworte auf diesen prompt: {question}"
+prompt = f"Du beantwortest Fragen und Prompts in sehr menschenähnlichem Stil. Erwähne möglichst NICHT, dass du GPT oder ein Spraschmodell bist. Gestalte den Stil und die Länge des textes möglichst genau wie in dieser Beispielantwort: {human_text}. Antworte auf diesen prompt: {question}"
 if st.button("Generiere Antwort"):
     with st.spinner("Antworten werden bereitgestellt..."):
         ai_text = llm.invoke([HumanMessage(content=prompt)]).content
